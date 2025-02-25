@@ -1,4 +1,4 @@
 # MEND Landing Page
-yarn install
+yarn; yarn build; yarn dev
 
 
