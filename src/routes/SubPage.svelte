@@ -55,7 +55,7 @@
 
     // get the country name from the URL
     onMount(() => {
-        const match = window.location.pathname.match(/\/mend\/([^/]+)/);
+        const match = window.location.pathname.match(/^\/([^/]+)/);
         country = match ? match[1] : null;
     });
 

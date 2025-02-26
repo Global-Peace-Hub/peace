@@ -5,6 +5,6 @@
 </script>
 
 <Router>
-  <Route basePath="/mend/" component={Home} />
-  <Route path="/mend/:dynamicPath" component={SubPage} />
+  <Route basePath="/" component={Home} />
+  <Route path="/:dynamicPath" component={SubPage} />
 </Router>

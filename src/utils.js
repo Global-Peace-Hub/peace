@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 
 export async function getGeo(url) {
-    let response = await fetch((import.meta.env.BASE_URL || "") + url);
+    let response = await fetch(url);
     let json = await response.json();
     return json;
 }

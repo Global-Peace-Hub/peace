@@ -172,7 +172,7 @@
         <Map
             {all_polygons}
             inflate={(data) => {
-                navigate("/mend/" + data);
+                navigate("/" + data);
                 // window.open("/glopad/" + data, "_blank");
             }}
         />
