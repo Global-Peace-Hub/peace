@@ -38,3 +38,5 @@ deploy-test:
   script:
     - !reference [build, before_script]
     - !reference [.deploy, script]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
