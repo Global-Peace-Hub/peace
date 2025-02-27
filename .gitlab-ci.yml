@@ -1,0 +1,19 @@
+image: node:23-alpine
+
+include:
+  - project: 'ResComp/gitlab-ci-includes'
+    file:
+      - ssh.yml
+
+stages:
+  - build
+
+build:
+  stage: build
+  before_script:
+    - yarn --frozen-lockfile install
+  script:
+    - yarn build
+  artifacts:
+    paths:
+      - dist/
