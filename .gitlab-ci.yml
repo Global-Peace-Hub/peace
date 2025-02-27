@@ -1,12 +1,18 @@
-image: node:23-alpine
+image: node:23-bookworm
 
 include:
   - project: 'ResComp/gitlab-ci-includes'
     file:
       - ssh.yml
 
+.deploy:
+  script:
+    - ssh -o stricthostkeychecking=no $SSH_USER@$SSH_SERVER "rm -fr $DEPLOY_PATH/*"
+    - scp -o stricthostkeychecking=no -r dist/* $SSH_USER@$SSH_SERVER:$DEPLOY_PATH
+
 stages:
   - build
+  - deploy-test
 
 build:
   stage: build
@@ -17,3 +23,18 @@ build:
   artifacts:
     paths:
       - dist/
+
+deploy-test:
+  stage: deploy-test
+  variables:
+    SSH_USER: $TEST_SSH_USER
+    SSH_SERVER: $TEST_SSH_SERVER
+    SSH_KEY: "$TEST_SSH_KEY"
+    SSH_PASSPHRASE: "$TEST_SSH_PASS"
+    DEPLOY_PATH: $TEST_DEPLOY_PATH
+  before_script:
+    - !reference [.ssh_with_passphrase, before_script]
+    - !reference [build, before_script]
+  script:
+    - !reference [build, before_script]
+    - !reference [.deploy, script]
